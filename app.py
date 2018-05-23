@@ -63,7 +63,7 @@ def get_message(spot):
 		{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
 		 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
 	}
-		
+
 	site = 'msw'
 
 	driver = webdriver.PhantomJS("C:/PATH/phantomjs.exe")
@@ -73,7 +73,7 @@ def get_message(spot):
 	img = Image.open("report.png")
 	w, h = img.size
 	img = img.crop((15,h-8335,w,h-3755)).save("report.png")
-    return 'success'
+	return 'success'
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id):
