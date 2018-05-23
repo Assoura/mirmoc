@@ -44,7 +44,7 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def get_message(spot):
-	url = {'Quiberon' :
+		url = {'Quiberon' :
 		{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
 		 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
 	 'Etretat' :
@@ -63,17 +63,17 @@ def get_message(spot):
 		{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
 		 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
 	}
-
+		
 	site = 'msw'
 
-	driver = webdriver.PhantomJS()
+	driver = webdriver.PhantomJS("C:/PATH/phantomjs.exe")
 	driver.set_window_size(840,620)
 	driver.get(url[spot][site])
 	driver.save_screenshot('report.png')
 	img = Image.open("report.png")
 	w, h = img.size
 	img = img.crop((15,h-8335,w,h-3755)).save("report.png")
-	return 'success'
+    return 'success'
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id):
