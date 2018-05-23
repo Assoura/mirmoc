@@ -44,7 +44,7 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def get_message(spot):
-		url = {'Quiberon' :
+	url = {'Quiberon' :
 		{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
 		 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
 	 'Etretat' :
