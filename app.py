@@ -1,7 +1,5 @@
 #Python libraries that we need to import for our bot
 import random
-from PIL import Image
-from selenium import webdriver
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
@@ -29,8 +27,13 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
-                    get_message(message['message']['text'])
-                    send_message(recipient_id)
+                    print(message['message']['text'])
+                    response_sent_text = get_message()
+                    send_message(recipient_id, response_sent_text)
+                #if user sends us a GIF, photo,video, or any other non-text item
+                if message['message'].get('attachments'):
+                    response_sent_nontext = get_message()
+                    send_message(recipient_id, response_sent_nontext)
     return "Message Processed"
 
 
@@ -43,42 +46,15 @@ def verify_fb_token(token_sent):
 
 
 #chooses a random message to send to the user
-def get_message(spot):
-		url = {'Quiberon' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-		 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
-	 'Etretat' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
-		 'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
-	 'Siouville' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
-		 'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
-	 'Vendee' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
-		 'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
-	 'La_torche' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
-		 'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
-	 'Seignosse' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
-		 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
-	}
-		
-	site = 'msw'
-
-	driver = webdriver.PhantomJS("C:/PATH/phantomjs.exe")
-	driver.set_window_size(840,620)
-	driver.get(url[spot][site])
-	driver.save_screenshot('report.png')
-	img = Image.open("report.png")
-	w, h = img.size
-	img = img.crop((15,h-8335,w,h-3755)).save("report.png")
-    return 'success'
+def get_message():
+    sample_responses = ["You are stunning!", "We're proud of you.", "Keep on being you!", "We're greatful to know you :)"]
+    # return selected item to the user
+    return random.choice(sample_responses)
 
 #uses PyMessenger to send response to user
-def send_message(recipient_id):
+def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
-    bot.send_image(recipient_id, "report.png")
+    bot.send_text_message(recipient_id, response)
     return "success"
 
 if __name__ == "__main__":
