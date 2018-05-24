@@ -32,7 +32,7 @@ def receive_message():
                     print("##################  Message reçu : "+message['message']['text'])
                     #get_message('Siouville')
                     #print("##################  Sortie fonction report")
-                    image_url = "/app/tst.png"
+                    image_url = "/app/test.png"
                     bot.send_text_message(recipient_id,'En maintenance... :(')
                     try:
                         bot.send_image_url(recipient_id, image_url)
