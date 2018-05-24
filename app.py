@@ -28,16 +28,17 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
+                print(message['sender']['id'])
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
                         try:
                             spot = message['message']['text'].split(' ')[1]
                             get_message(spot)
                         except:
-                            bot.send_text_message(recipient_id, 'You **** my wife ?!')
-                            bot.send_image(recipient_id, "test.png")
+                            print('Erreur')
                         else:
-                            bot.send_image(recipient_id, "report.png")                    
+                            bot.send_image(recipient_id, "report.png")
+                        bot.send_image(recipient_id, "test.png")
     return "Message Processed"
 
 
