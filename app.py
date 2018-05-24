@@ -51,35 +51,35 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def get_message(spot):
-	url = {'Quiberon' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-		 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
-	 'Etretat' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
-		 'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
-	 'Siouville' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
-		 'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
-	 'Vendee' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
-		 'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
-	 'La_torche' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
-		 'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
-	 'Seignosse' :
-		{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
-		 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
-	}
+    url = {'Quiberon' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
+    	 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
+     'Etretat' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
+    	 'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
+     'Siouville' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
+    	 'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
+     'Vendee' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
+    	 'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
+     'La_torche' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
+    	 'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
+     'Seignosse' :
+    	{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
+    	 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
+    }
 
-	site = 'msw'
+    site = 'msw'
 
-	driver = webdriver.PhantomJS()
-	driver.set_window_size(840,620)
-	driver.get(url[spot][site])
-	driver.save_screenshot('report.png')
-	img = Image.open("report.png")
-	w, h = img.size
-	img = img.crop((15,h-8335,w,h-3755)).save("report.png")
+    driver = webdriver.PhantomJS()
+    driver.set_window_size(840,620)
+    driver.get(url[spot][site])
+    driver.save_screenshot('report.png')
+    img = Image.open("report.png")
+    w, h = img.size
+    img = img.crop((15,h-8335,w,h-3755)).save("report.png")
     return 'success'
 
 if __name__ == "__main__":
