@@ -28,7 +28,8 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                print(recipient_id)
+                if recipient_id == '1547681661986967':
+                    bot.send_text_message('1547681661986967',recipient_id+' à envoyé : '+message['message']['text'])
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
                         try:
