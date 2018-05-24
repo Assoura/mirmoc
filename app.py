@@ -30,41 +30,45 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
-                        url = {'Quiberon' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-                        	 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
-                         'Etretat' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
-                        	 'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
-                         'Siouville' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
-                        	 'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
-                         'Vendee' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
-                        	 'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
-                         'La_torche' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
-                        	 'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
-                         'Seignosse' :
-                        	{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
-                        	 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
-                        }
-                        spot = message['message']['text'].split(' ')[1]
-                        site = message['message']['text'].split(' ')[2]
-                        bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment :')
-                        bot.send_text_message(recipient_id,url[spot][site])
-                    else:
-                        print("##################  Message reçu : "+message['message']['text'])
-                        #get_message('Siouville')
-                        #print("##################  Sortie fonction report")
-                        image_url = "/app/test.png"
-                        bot.send_text_message(recipient_id,'En maintenance... :(')
                         try:
-                            bot.send_image_url(recipient_id, image_url)
-                        except:
-                            print("##################  Erreur")
-                        else:
-                            print("##################  Message envoyé")
+                            url = {'Quiberon' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
+                            	 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
+                             'Etretat' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
+                            	 'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
+                             'Siouville' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
+                            	 'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
+                             'Vendee' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
+                            	 'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
+                             'La_torche' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
+                            	 'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
+                             'Seignosse' :
+                            	{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
+                            	 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
+                            }
+                            spot = message['message']['text'].split(' ')[1]
+                            site = message['message']['text'].split(' ')[2]
+                            bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment :')
+                            bot.send_text_message(recipient_id,url[spot][site])
+                        finally:
+                            bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Et ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                    else:
+                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Et ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                            #print("##################  Message reçu : "+message['message']['text'])
+                            #get_message('Siouville')
+                            #print("##################  Sortie fonction report")
+                            #image_url = "/app/test.png"
+                            #bot.send_text_message(recipient_id,'En maintenance... :(')
+                        #try:
+                            #bot.send_image_url(recipient_id, image_url)
+                        #except:
+                        #    print("##################  Erreur")
+                        #else:
+                        #    print("##################  Message envoyé")
     return "Message Processed"
 
 
