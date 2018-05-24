@@ -29,10 +29,11 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
-                    print("##################   Message reçu :"+message['message']['text'])
-                    get_message('Siouville')
-                    print("##################   Sortie fonction report")
-                    bot.send_text_message(recipient_id, "Got you !")
+                    print("##################  Message reçu : "+message['message']['text'])
+                    #get_message('Siouville')
+                    #print("##################  Sortie fonction report")
+                    file_url = "/app/test.png"
+                    bot.send_file_url(recipient_id, file_url)
     return "Message Processed"
 
 
@@ -68,15 +69,11 @@ def get_message(spot):
 
     site = 'msw'
     print("##################  Start PhantomJS ")
-    driver = webdriver.PhantomJS("/app/bin/phantomjs")
     driver.set_window_size(840,620)
     print("##################  Ouvre site")
     driver.get(url[spot][site])
     print("##################  Site ouvert")
-    try:
-        driver.save_screenshot('/app/test.png')
-    except:
-        print("##################  Erreur")
+    driver.save_screenshot("/app/test.png")
     print("##################  Screenshot fait")
     #img = Image.open("report.png")
     #w, h = img.size
