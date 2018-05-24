@@ -33,6 +33,7 @@ def receive_message():
                     #get_message('Siouville')
                     #print("##################  Sortie fonction report")
                     image_url = "/app/tst.png"
+                    bot.send_text_message(recipient_id,'En maintenance... :(')
                     try:
                         bot.send_image_url(recipient_id, image_url)
                     except:
@@ -87,3 +88,5 @@ def get_message(spot):
 
 if __name__ == "__main__":
     app.run()
+
+#print("#####"+os.getcwd())
