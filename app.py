@@ -37,7 +37,7 @@ def receive_message():
                     try:
                         bot.send_image_url(recipient_id, image_url)
                     except:
-                        print("##################  Message envoyé")
+                        print("##################  Erreur")
                     else:
                         print("##################  Message envoyé")
     return "Message Processed"
