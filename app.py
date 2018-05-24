@@ -32,8 +32,9 @@ def receive_message():
                     print("##################  Message reçu : "+message['message']['text'])
                     #get_message('Siouville')
                     #print("##################  Sortie fonction report")
-                    file_url = "/app/test.png"
-                    bot.send_file_url(recipient_id, file_url)
+                    image_url = "/app/test.png"
+                    bot.send_file_url(recipient_id, image_url)
+                    print("##################  Message envoé")
     return "Message Processed"
 
 
