@@ -66,15 +66,16 @@ def get_message(spot):
     }
 
     site = 'msw'
-    print("##################   ")
+    print("##################  Start PhantomJS ")
     driver = webdriver.PhantomJS("/app/bin/phantomjs")
-    print("##################   ")
+    print("##################  Ouvre windows")
     driver.set_window_size(840,620)
+    print("##################  Fetch site")
     driver.get(url[spot][site])
-    driver.save_screenshot('report.png')
-    img = Image.open("report.png")
-    w, h = img.size
-    img = img.crop((15,h-8335,w,h-3755)).save("report.png")
+    #driver.save_screenshot('report.png')
+    #img = Image.open("report.png")
+    #w, h = img.size
+    #img = img.crop((15,h-8335,w,h-3755)).save("report.png")
     return 'success'
 
 if __name__ == "__main__":
