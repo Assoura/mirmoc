@@ -34,7 +34,7 @@ def receive_message():
                     #print("##################  Sortie fonction report")
                     image_url = "/app/tst.png"
                     try:
-                    bot.send_image_url(recipient_id, image_url)
+                        bot.send_image_url(recipient_id, image_url)
                     except:
                         print("##################  Message envoyé")
                     else:
