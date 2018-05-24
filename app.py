@@ -31,6 +31,7 @@ def receive_message():
                 if message['message'].get('text'):
                     print("##################   Message reçu :"+message['message']['text'])
                     get_message('Siouville')
+                    print("##################   Sortie fonction report")
                     bot.send_text_message(recipient_id, "Got you !")
     return "Message Processed"
 
