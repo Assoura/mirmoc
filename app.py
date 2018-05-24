@@ -28,8 +28,7 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                print("##################   "+os.getcwd())
-                print(message['sender']['id'])
+                print("##################   "+message['sender']['id'])
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
                         try:
@@ -38,8 +37,8 @@ def receive_message():
                         except:
                             print('Erreur')
                         else:
-                            bot.send_image(recipient_id, "report.png")
-                        bot.send_image(recipient_id, "test.png")
+                            bot.send_image(recipient_id, "/app/report.png")
+                        bot.send_image(recipient_id, "/app/test.png")
     return "Message Processed"
 
 
@@ -74,7 +73,9 @@ def get_message(spot):
     }
 
     site = 'msw'
+    print("##################   ")
     driver = webdriver.PhantomJS()
+    print("##################   ")
     driver.set_window_size(840,620)
     driver.get(url[spot][site])
     driver.save_screenshot('report.png')
