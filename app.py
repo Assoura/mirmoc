@@ -34,7 +34,7 @@ def receive_message():
                     #print("##################  Sortie fonction report")
                     image_url = "/app/test.png"
                     bot.send_file_url(recipient_id, image_url)
-                    print("##################  Message envoé")
+                    print("##################  Message envoyé")
     return "Message Processed"
 
 
