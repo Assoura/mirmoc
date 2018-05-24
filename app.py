@@ -74,7 +74,7 @@ def get_message(spot):
     driver.get(url[spot][site])
     print("##################  Site ouvert")
     try:
-        driver.save_screenshot('report.png')
+        driver.save_screenshot('test.png')
     except:
         print("##################  Erreur")
     print("##################  Screenshot fait")
