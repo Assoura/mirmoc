@@ -28,12 +28,12 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                print("##################   "+message['sender']['id'])
                 if message['message'].get('text'):
+                    print("##################   "+message['sender']['text'])
                     if "Mirmoc" in message['message']['text']:
+                        print("##################   "+spot)
                         try:
                             spot = message['message']['text'].split(' ')[1]
-                            print("##################   "+spot)
                             get_message(spot)
                         except:
                             print('Erreur')
