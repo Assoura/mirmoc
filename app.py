@@ -29,7 +29,7 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
-                    print("##################   "+message['sender']['text'])
+                    print("##################   "+message['message']['text'])
                     if "Mirmoc" in message['message']['text']:
                         print("##################   "+spot)
                         try:
