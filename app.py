@@ -38,6 +38,7 @@ def receive_message():
                             print('Erreur')
                         else:
                             bot.send_image(recipient_id, "/app/report.png")
+                    else:
                         bot.send_image(recipient_id, "/app/test.png")
     return "Message Processed"
 
