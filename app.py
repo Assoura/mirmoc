@@ -30,7 +30,7 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
                     print("##################   Message reçu :"+message['message']['text'])
-                    get_message(spot)
+                    get_message('Siouville')
                     bot.send_text_message(recipient_id, "Got you !")
     return "Message Processed"
 
