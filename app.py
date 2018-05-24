@@ -29,15 +29,15 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
-					if "Mirmoc" in message['message']['text']:
-						try:
-							get_message(message['message']['text'])
-						except:
-							bot.send_text_message(recipient_id, 'You fuck my wife ?!')
-						else:
-							bot.send_image(recipient_id, "report.png")
-					else:
-						bot.send_text_message(recipient_id, 'Not for me but got it!')
+                    if "Mirmoc" in message['message']['text']:
+                        try:
+                            get_message(message['message']['text'])
+                        except:
+                            bot.send_text_message(recipient_id, 'You fuck my wife ?!')
+                        else:
+                            bot.send_image(recipient_id, "report.png")
+                        else:
+                            bot.send_text_message(recipient_id, 'Not for me but got it!')
     return "Message Processed"
 
 
