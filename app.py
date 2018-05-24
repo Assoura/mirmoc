@@ -33,8 +33,12 @@ def receive_message():
                     #get_message('Siouville')
                     #print("##################  Sortie fonction report")
                     image_url = "/app/tst.png"
-                    bot.send_file_url(recipient_id, image_url)
-                    print("##################  Message envoyé")
+                    try:
+                    bot.send_image_url(recipient_id, image_url)
+                    except:
+                        print("##################  Message envoyé")
+                    else:
+                        print("##################  Message envoyé")
     return "Message Processed"
 
 
