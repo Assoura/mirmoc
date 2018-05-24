@@ -51,6 +51,7 @@ def receive_message():
                         }
                         spot = message['message']['text'].split(' ')[1]
                         site = message['message']['text'].split(' ')[2]
+                        bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment :')
                         bot.send_text_message(recipient_id,url[spot][site])
                     else:
                         print("##################  Message reçu : "+message['message']['text'])
