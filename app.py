@@ -37,11 +37,12 @@ def receive_message():
                         except:
                             print('Erreur')
                         else:
-                            bot.send_text_message(recipient_id, response)
+                            bot.send_text_message(recipient_id, "Got you !")
                             image_path = "/app/test.png"
                             bot.send_image(recipient_id, image_path)
                     else:
                         image_path = "/app/test.png"
+                        bot.send_text_message(recipient_id, "Too bad !")
                         bot.send_image(recipient_id, image_path)
     return "Message Processed"
 
