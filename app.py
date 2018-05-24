@@ -6,7 +6,7 @@ from flask import Flask, request
 from pymessenger.bot import Bot
 import os
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #EAAZAm0NGhNvoBABPn6MhEJGxN2Hhw37GZC53iXBOUDqGEbHsPV03ZCZCHSWnaW5y4q8a1H2gb5SC8VNKQKnfvMV0ucD03cPaeDnnovXzibahv6SapNJOWQd10UvG1sO0TtW4qE3kFx652tzLeA1tOh12xoZBZA4qo6uPsXTTIZCfAZDZD
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 
@@ -37,9 +37,12 @@ def receive_message():
                         except:
                             print('Erreur')
                         else:
-                            bot.send_image(recipient_id, "/app/report.png")
+                            bot.send_text_message(recipient_id, response)
+                            image_path = "/app/test.png"
+                            bot.send_image(recipient_id, image_path)
                     else:
-                        bot.send_image(recipient_id, "/app/test.png")
+                        image_path = "/app/test.png"
+                        bot.send_image(recipient_id, image_path)
     return "Message Processed"
 
 
