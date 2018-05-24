@@ -33,10 +33,12 @@ def receive_message():
                     if "Mirmoc" in message['message']['text']:
                         try:
                             spot = message['message']['text'].split(' ')[1]
+                            print("##################   "+spot)
                             get_message(spot)
                         except:
                             print('Erreur')
                         else:
+                            print("##################  jusquici tvb")
                             bot.send_text_message(recipient_id, "Got you !")
                             image_path = "/app/test.png"
                             bot.send_image(recipient_id, image_path)
