@@ -67,7 +67,7 @@ def get_message(spot):
 
     site = 'msw'
     print("##################   ")
-    driver = webdriver.PhantomJS()
+    driver = webdriver.PhantomJS("/app/bin/phantomjs")
     print("##################   ")
     driver.set_window_size(840,620)
     driver.get(url[spot][site])
