@@ -35,11 +35,9 @@ def receive_message():
                             get_message(spot)
                         except:
                             bot.send_text_message(recipient_id, 'You **** my wife ?!')
+                            bot.send_image(recipient_id, "test.png")
                         else:
-                            bot.send_image(recipient_id, "report.png")
-                    else:
-                        bot.send_text_message(recipient_id, 'Not for me but take this:')
-                        bot.send_image(recipient_id, "test.png")
+                            bot.send_image(recipient_id, "report.png"                    
     return "Message Processed"
 
 
@@ -74,9 +72,7 @@ def get_message(spot):
     }
 
     site = 'msw'
-    print(spot)
     driver = webdriver.PhantomJS()
-    print(spot)
     driver.set_window_size(840,620)
     driver.get(url[spot][site])
     driver.save_screenshot('report.png')
