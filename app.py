@@ -31,6 +31,7 @@ def receive_message():
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
                         try:
+                            commande = message['message']['text']
                             url = {'Quiberon' :
                             	{'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
                             	 'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
@@ -50,8 +51,8 @@ def receive_message():
                             	{'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
                             	 'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
                             }
-                            spot = message['message']['text'].split(' ')[1]
-                            site = message['message']['text'].split(' ')[2]
+                            spot = commande.split(' ')[1]
+                            site = commande.split(' ')[2]
                             bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment :')
                             bot.send_text_message(recipient_id,url[spot][site])
                         else:
