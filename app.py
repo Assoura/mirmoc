@@ -34,11 +34,12 @@ def receive_message():
                             spot = message['message']['text'].split(' ')[1]
                             get_message(spot)
                         except:
-                            bot.send_text_message(recipient_id, 'You fuck my wife ?!')
+                            bot.send_text_message(recipient_id, 'You **** my wife ?!')
                         else:
                             bot.send_image(recipient_id, "report.png")
                     else:
-                        bot.send_text_message(recipient_id, 'Not for me but got it!')
+                        bot.send_text_message(recipient_id, 'Not for me but take this:')
+                        bot.send_image(recipient_id, "test.png")
     return "Message Processed"
 
 
