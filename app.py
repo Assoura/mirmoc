@@ -37,7 +37,7 @@ def receive_message():
                             bot.send_text_message(recipient_id, 'You **** my wife ?!')
                             bot.send_image(recipient_id, "test.png")
                         else:
-                            bot.send_image(recipient_id, "report.png"                    
+                            bot.send_image(recipient_id, "report.png")                    
     return "Message Processed"
 
 
