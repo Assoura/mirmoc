@@ -31,13 +31,14 @@ def receive_message():
                 if message['message'].get('text'):
                     if "Mirmoc" in message['message']['text']:
                         try:
-                            get_message(message['message']['text'])
+                            spot = message['message']['text'].split(' ')[1]
+                            get_message(spot)
                         except:
                             bot.send_text_message(recipient_id, 'You fuck my wife ?!')
                         else:
                             bot.send_image(recipient_id, "report.png")
-                else:
-                    bot.send_text_message(recipient_id, 'Not for me but got it!')
+                    else:
+                        bot.send_text_message(recipient_id, 'Not for me but got it!')
     return "Message Processed"
 
 
