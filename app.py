@@ -21,6 +21,7 @@ bot = Bot (ACCESS_TOKEN)
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     timer = 1
+    print('###################### 0')
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
@@ -42,6 +43,7 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
                 print(recipient_id+' a envoyé : '+commande)
+                print timer
                 if message['message'].get('text') and "Mirmoc" in message['message']['text'] and timer == 1:
                     timer = 0
                     try:
@@ -49,6 +51,7 @@ def receive_message():
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
                         timer = 1
+                        time.sleep(10)
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                         timer = 1
