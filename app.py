@@ -23,46 +23,30 @@ print('3')
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    if request.method == 'GET':
-        """Before allowing people to message your bot, Facebook has implemented a verify token
-        that confirms all requests that your bot receives came from Facebook."""
-        token_sent = request.args.get("hub.verify_token")
-        print('5')
-        return verify_fb_token(token_sent)
-    #if the request was not get, it must be POST and we can just proceed with sending a message back to user
-    else:
-       print('8')
-       output = request.get_json()
-       print('9')
-       for event in output['entry']:
-          print('10')
-          messaging = event['messaging']
-          for message in messaging:
-            print('11')
-            if message.get('message'):
-                print('12')
-                recipient_id = message['sender']['id']
-                commande = message['message']['text']
-                if message['message'].get('text') and "Mirmoc" in message['message']['text']:
-                    try:
-                        print('13')
-                        scraping(commande,recipient_id)
-                        send_report(recipient_id)
-                    except:
-                        print('14')
-                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-                else:
-                    print('15')
+   print('8')
+   output = request.get_json()
+   print('9')
+   for event in output['entry']:
+      print('10')
+      messaging = event['messaging']
+      for message in messaging:
+        print('11')
+        if message.get('message'):
+            print('12')
+            recipient_id = message['sender']['id']
+            commande = message['message']['text']
+            if message['message'].get('text') and "Mirmoc" in message['message']['text']:
+                try:
+                    print('13')
+                    scraping(commande,recipient_id)
+                    send_report(recipient_id)
+                except:
+                    print('14')
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-    return "Message Processed"
-
-def verify_fb_token(token_sent):
-    #take token sent by facebook and verify it matches the verify token you sent
-    #if they match, allow the request, else return an error
-    if token_sent == VERIFY_TOKEN:
-        print('7')
-        return request.args.get("hub.challenge")
-    return 'Invalid verification token'
+            else:
+                print('15')
+                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+return "Message Processed"
 
 #chooses a random message to send to the user
 def scraping(commande,recipient_id):
@@ -139,7 +123,3 @@ def send_report(recipient_id):
     except:
         print('Erreur send_report')
         print('138')
-
-if __name__ == "__main__":
-    print('16')
-    app.run()
