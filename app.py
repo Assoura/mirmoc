@@ -56,13 +56,15 @@ def receive_message():
                             }
                             spot = commande.split(' ')[1]
                             site = commande.split(' ')[2]
-                            bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment : '+url[spot][site])
-                            attach_url = 'https://github.com/Assoura/mirmoc/blob/master/report.png?raw=true'
-                            bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
-                            send_attachment(recipient_id, attach_url)
+
+                            #bot.send_text_message(recipient_id,'Je ne peux faire que ça pour le moment : '+url[spot][site])
+                            #attach_url = 'https://github.com/Assoura/mirmoc/blob/master/report.png?raw=true'
+                            #bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
+                            #send_attachment(recipient_id, attach_url)
+
                             print(os.getcwd())
                             print(os.listdir(os.getcwd()))
-                            driver = webdriver.PhantomJS(os.getcwd()+"/bin")
+                            driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
                             driver.set_window_size(840,620)
                             print("##################  Ouvre site")
                             driver.get(url[spot][site])
