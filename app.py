@@ -94,37 +94,37 @@ def scraping(commande,recipient_id):
 
 def send_report(recipient_id):
     try:
-    params = {
-        "access_token": os.environ["ACCESS_TOKEN"]
-    }
-    print(os.listdir(os.getcwd()))
-    data = {
-        # encode nested json to avoid errors during multipart encoding process
-        'recipient': json.dumps({
-            'id': recipient_id
-        }),
-        # encode nested json to avoid errors during multipart encoding process report_'+recipient_id+'
-        'message': json.dumps({
-            'attachment': {
-                'type': 'image',
-                'payload': {}
-            }
-        }),
-        'filedata': (os.path.basename('report2.png'), open('report2.png', 'rb'), 'image/png')
-    }
+        params = {
+            "access_token": os.environ["ACCESS_TOKEN"]
+        }
+        print(os.listdir(os.getcwd()))
+        data = {
+            # encode nested json to avoid errors during multipart encoding process
+            'recipient': json.dumps({
+                'id': recipient_id
+            }),
+            # encode nested json to avoid errors during multipart encoding process report_'+recipient_id+'
+            'message': json.dumps({
+                'attachment': {
+                    'type': 'image',
+                    'payload': {}
+                }
+            }),
+            'filedata': (os.path.basename('report2.png'), open('report2.png', 'rb'), 'image/png')
+        }
 
-    # multipart encode the entire payload
-    multipart_data = MultipartEncoder(data)
+        # multipart encode the entire payload
+        multipart_data = MultipartEncoder(data)
 
-    # multipart header from multipart_data
-    multipart_header = {
-        'Content-Type': multipart_data.content_type
-    }
-    print(os.listdir(os.getcwd()))
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
-    if r.status_code != 200:
-        print(r.status_code)
-        print(r.text)
+        # multipart header from multipart_data
+        multipart_header = {
+            'Content-Type': multipart_data.content_type
+        }
+        print(os.listdir(os.getcwd()))
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
+        if r.status_code != 200:
+            print(r.status_code)
+            print(r.text)
     except:
         print('Erreur send_report')
 
