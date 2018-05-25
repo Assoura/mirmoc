@@ -57,6 +57,7 @@ def receive_message():
                 else:
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                     timer =1
+                timer = 0
     return "Message Processed"
 
 
