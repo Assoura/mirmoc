@@ -60,8 +60,9 @@ def receive_message():
                             attach_url = 'https://github.com/Assoura/mirmoc/blob/master/report.png?raw=true'
                             bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
                             send_attachment(recipient_id, attach_url)
+                            print(os.getcwd())
                             print(os.listdir(os.getcwd()))
-                            driver = webdriver.PhantomJS("/app/bin")
+                            driver = webdriver.PhantomJS(os.getcwd()+"/bin")
                             driver.set_window_size(840,620)
                             print("##################  Ouvre site")
                             driver.get(url[spot][site])
