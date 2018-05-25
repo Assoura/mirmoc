@@ -61,7 +61,7 @@ def receive_message():
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
                         attach_url = 'https://www.twilio.com/blog/wp-content/uploads/2018/02/LaqUIdJlww5Owe1-WfT6X4Fa-0IATw-WENNtnOlZ5ZQzM_ANYwCwTDbsF6qreQaiGE4UH5k0zoBSM4r7Xp6Z-8MCdp47KVNmGyyRKmeLcmUr26rl6LNzx0ZkK59Yleq_Z3wZR-jV.png'
-                        attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png'
+                        attach_url = os.getcwd()+'/test.png'
                         send_attachment(recipient_id, attach_url)
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                             #print("##################  Message reçu : "+message['message']['text'])
