@@ -33,12 +33,12 @@ def receive_message():
                 commande = message['message']['text']
                 print(recipient_id+' a envoyé : '+commande)
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
-                    try:
-                        scraping(commande,recipient_id)
-                        #send_report(recipient_id)
-                    except:
-                        print('Erreur')
-                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                    #try:
+                    scraping(commande,recipient_id)
+                    send_report(recipient_id)
+                    #except:
+                    #    print('Erreur')
+                    #    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
@@ -80,13 +80,13 @@ def scraping(commande,recipient_id):
     #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
     driver.get(url[spot][site])
     #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
-    print(os.getcwd())
+    print(os.listdir(os.getcwd()))
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
-    print(os.getcwd())
+    print(os.listdir(os.getcwd()))
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
 
