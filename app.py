@@ -80,7 +80,7 @@ def scraping(commande,recipient_id):
              'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
         }
         spot = commande.split(' ')[1]
-        bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+        bot.send_text_message(recipient_id,'''Got you ! Je cherche...''')
         driver.get(url[spot][site])
         bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
         print(os.listdir(os.getcwd()))
@@ -92,6 +92,7 @@ def scraping(commande,recipient_id):
         print(os.listdir(os.getcwd()))
         bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
+        bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'''')
         print('Erreur scraping')
 
 def send_report(recipient_id):
