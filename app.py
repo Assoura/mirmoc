@@ -9,8 +9,8 @@ from requests_toolbelt import MultipartEncoder
 from pymessenger.bot import Bot
 import os
 
-driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
-driver.set_window_size(840,620)
+#driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
+#driver.set_window_size(840,620)
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #EAAZAm0NGhNvoBABPn6MhEJGxN2Hhw37GZC53iXBOUDqGEbHsPV03ZCZCHSWnaW5y4q8a1H2gb5SC8VNKQKnfvMV0ucD03cPaeDnnovXzibahv6SapNJOWQd10UvG1sO0TtW4qE3kFx652tzLeA1tOh12xoZBZA4qo6uPsXTTIZCfAZDZD
