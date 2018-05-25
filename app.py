@@ -59,6 +59,7 @@ def verify_fb_token(token_sent):
 #chooses a random message to send to the user
 def scraping(commande,recipient_id):
     try:
+        site = 'msw'
         url = {'Quiberon' :
             {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
              'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
@@ -79,18 +80,17 @@ def scraping(commande,recipient_id):
              'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
         }
         spot = commande.split(' ')[1]
-        site = 'msw'
-        #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+        bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
         driver.get(url[spot][site])
-        #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+        bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
         print(os.listdir(os.getcwd()))
         driver.save_screenshot(os.getcwd()+'/report1.png')
-        #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-        img = Image.open(os.getcwd()+'/report1.png')
+        bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+        img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
         w, h = img.size
-        img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report2.png')
+        #img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
         print(os.listdir(os.getcwd()))
-        #bot.send_text_message(recipient_id,'''Je les enregistre...''')
+        bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
         print('Erreur scraping')
 
@@ -112,7 +112,7 @@ def send_report(recipient_id):
                     'payload': {}
                 }
             }),
-            'filedata': (os.path.basename('report2.png'), open('report2.png', 'rb'), 'image/png')
+            'filedata': (os.path.basename('report_'+recipient_id+'.png'), open('report_'+recipient_id+'.png', 'rb'), 'image/png')
         }
 
         # multipart encode the entire payload
