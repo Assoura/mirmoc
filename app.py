@@ -50,8 +50,8 @@ def receive_message():
                         print('try...')
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
-                        timer = 1
                         time.sleep(10)
+                        timer = 1
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                         timer = 1
