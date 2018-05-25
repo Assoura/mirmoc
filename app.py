@@ -69,29 +69,50 @@ def receive_message():
                             #w, h = img.size
                             #img = img.crop((15,h-8335,w,h-3755)).save("report.png")
                             print(os.listdir(os.getcwd()))
-                            try:
-                                send_message(recipient_id, "Et voilà :")
-                            else:
-                                bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
-                                bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
-                                attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
-                                send_attachment(recipient_id, attach_url)
+
+                            print("sending message to {recipient}: {text}".format(recipient=recipient_id, text='Et voilà'))
+
+                            params = {
+                                "access_token": os.environ["ACCESS_TOKEN"]
+                            }
+                            print(os.getcwd())
+                            data = {
+                                # encode nested json to avoid errors during multipart encoding process
+                                'recipient': json.dumps({
+                                    'id': recipient_id
+                                }),
+                                # encode nested json to avoid errors during multipart encoding process
+                                'message': json.dumps({
+                                    'attachment': {
+                                        'type': 'image',
+                                        'payload': {}
+                                    }
+                                }),
+                                'filedata': (os.path.basename('report.png'), open('report.png', 'rb'), 'image/png')
+                            }
+
+                            # multipart encode the entire payload
+                            multipart_data = MultipartEncoder(data)
+
+                            # multipart header from multipart_data
+                            multipart_header = {
+                                'Content-Type': multipart_data.content_type
+                            }
+
+                            r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
+                            if r.status_code != 200:
+                                print(r.status_code)
+                                print(r.text)
+
+                            #bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
+                            #bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
+                            #attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
+                            #send_attachment(recipient_id, attach_url)
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
                         print(os.getcwd())
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
-                            #print("##################  Message reçu : "+message['message']['text'])
-                            #get_message('Siouville')
-                            #print("##################  Sortie fonction report")
-                            #image_url = "/app/test.png"
-                            #bot.send_text_message(recipient_id,'En maintenance... :(')
-                        #try:
-                            #bot.send_image_url(recipient_id, image_url)
-                        #except:
-                        #    print("##################  Erreur")
-                        #else:
-                        #    print("##################  Message envoyé")
     return "Message Processed"
 
 
