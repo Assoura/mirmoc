@@ -38,7 +38,6 @@ def receive_message():
                         #scraping(commande,recipient_id)
                         send_report(recipient_id)
                     except:
-                        print('Erreur')
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
@@ -55,45 +54,50 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def scraping(commande,recipient_id):
-    url = {'Quiberon' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-         'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
-     'Etretat' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
-         'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
-     'Siouville' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
-         'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
-     'Vendee' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
-         'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
-     'La_torche' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
-         'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
-     'Seignosse' :
-        {'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
-         'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
-    }
-    spot = commande.split(' ')[1]
-    site = 'msw'
-    driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
-    driver.set_window_size(840,620)
-    #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
-    driver.get(url[spot][site])
-    #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
-    print(os.listdir(os.getcwd()))
-    driver.save_screenshot(os.getcwd()+'/report1.png')
-    #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-    img = Image.open(os.getcwd()+'/report1.png')
-    w, h = img.size
-    img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report2.png')
-    print(os.listdir(os.getcwd()))
-    #bot.send_text_message(recipient_id,'''Je les enregistre...''')
+    try:
+        url = {'Quiberon' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
+             'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
+         'Etretat' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
+             'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
+         'Siouville' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
+             'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
+         'Vendee' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
+             'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
+         'La_torche' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
+             'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
+         'Seignosse' :
+            {'surf_report' : "https://www.surf-report.com/meteo-surf/les-casernes-seignosse-s1187.html",
+             'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
+        }
+        spot = commande.split(' ')[1]
+        site = 'msw'
+        driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
+        driver.set_window_size(840,620)
+        #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+        driver.get(url[spot][site])
+        #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+        print(os.listdir(os.getcwd()))
+        driver.save_screenshot(os.getcwd()+'/report1.png')
+        #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+        img = Image.open(os.getcwd()+'/report1.png')
+        w, h = img.size
+        img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report2.png')
+        print(os.listdir(os.getcwd()))
+        #bot.send_text_message(recipient_id,'''Je les enregistre...''')
+    except:
+        print('Erreur scraping')
 
 def send_report(recipient_id):
+    try:
     params = {
         "access_token": os.environ["ACCESS_TOKEN"]
     }
+    print(os.listdir(os.getcwd()))
     data = {
         # encode nested json to avoid errors during multipart encoding process
         'recipient': json.dumps({
@@ -106,7 +110,7 @@ def send_report(recipient_id):
                 'payload': {}
             }
         }),
-        'filedata': (os.path.basename('report.png'), open('report2.png', 'rb'), 'image/png')
+        'filedata': (os.path.basename('report2.png'), open('report2.png', 'rb'), 'image/png')
     }
 
     # multipart encode the entire payload
@@ -116,11 +120,13 @@ def send_report(recipient_id):
     multipart_header = {
         'Content-Type': multipart_data.content_type
     }
-
+    print(os.listdir(os.getcwd()))
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
     if r.status_code != 200:
         print(r.status_code)
         print(r.text)
+    except:
+        print('Erreur send_report')
 
 if __name__ == "__main__":
     app.run()
