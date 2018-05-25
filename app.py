@@ -82,9 +82,9 @@ def scraping(commande,recipient_id):
         spot = commande.split(' ')[1]
         bot.send_text_message(recipient_id,'''Got you ! Je cherche...''')
         driver.get(url[spot][site])
-        bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+        bot.send_text_message(recipient_id,'''Trouvé ! Je choppe les prévisions...''')
         print(os.listdir(os.getcwd()))
-        driver.save_screenshot(os.getcwd()+'/report'+recipient_id+'.png')
+        driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
         bot.send_text_message(recipient_id,'''Je les mets en forme...''')
         img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
         w, h = img.size
