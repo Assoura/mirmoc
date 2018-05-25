@@ -1,5 +1,6 @@
 #Python libraries that we need to import for our bot
 import json
+import time
 import requests
 from PIL import Image
 from selenium import webdriver
@@ -39,8 +40,11 @@ def receive_message():
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         print('try...')
+                        time.sleep(5)
                         scraping(commande,recipient_id)
+                        time.sleep(5)
                         send_report(recipient_id)
+                        time.sleep(5)
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
