@@ -90,7 +90,7 @@ def scraping(commande,recipient_id):
         w, h = img.size
         print(h)
         print(w)
-        img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report.png')
+        img = img.crop((15,h,w,h-3755)).save(os.getcwd()+'/report.png')
         print(os.listdir(os.getcwd()))
         #bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
