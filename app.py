@@ -92,7 +92,7 @@ def scraping(commande,recipient_id):
         print(os.listdir(os.getcwd()))
         bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
-        bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'''')
+        bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'. ''')
         print('Erreur scraping')
 
 def send_report(recipient_id):
