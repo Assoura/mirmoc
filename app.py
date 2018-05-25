@@ -40,11 +40,8 @@ def receive_message():
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         print('try...')
-                        time.sleep(5)
                         scraping(commande,recipient_id)
-                        time.sleep(5)
                         send_report(recipient_id)
-                        time.sleep(5)
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
@@ -90,12 +87,12 @@ def scraping(commande,recipient_id):
         print(os.listdir(os.getcwd()))
         driver.save_screenshot(os.getcwd()+'/report.png')
         #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-        img = Image.open(os.getcwd()+'/report.png')
-        w, h = img.size
-        print(h)
-        print(w)
-        img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report.png')
-        print(os.listdir(os.getcwd()))
+        #img = Image.open(os.getcwd()+'/report.png')
+        #w, h = img.size
+        #print(h)
+        #print(w)
+        #img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report.png')
+        #print(os.listdir(os.getcwd()))
         #bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
         bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'. ''')
