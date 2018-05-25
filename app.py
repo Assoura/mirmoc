@@ -71,7 +71,7 @@ def receive_message():
                             print(os.listdir(os.getcwd()))
                             try:
                                 send_message(recipient_id, "Et voilà :")
-                            except:
+                            else:
                                 bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
                                 bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
                                 attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
