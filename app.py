@@ -121,7 +121,7 @@ def get_message(spot):
     return 'success'
 
 def send_attachment(send_id, attach_url):
-    params  = {"access_token": os.environ['access_token']}
+    params  = {"access_token": os.environ['ACCESS_TOKEN']}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({"recipient": {
                         "id": send_id
