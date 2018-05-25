@@ -36,7 +36,7 @@ def receive_message():
                     try:
                         print('try...')
                         #scraping(commande,recipient_id)
-                        #send_report(recipient_id)
+                        send_report(recipient_id)
                     except:
                         print('Erreur')
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
@@ -100,14 +100,14 @@ def send_report(recipient_id):
         'recipient': json.dumps({
             'id': recipient_id
         }),
-        # encode nested json to avoid errors during multipart encoding process
+        # encode nested json to avoid errors during multipart encoding process report_'+recipient_id+'
         'message': json.dumps({
             'attachment': {
                 'type': 'image',
                 'payload': {}
             }
         }),
-        'filedata': (os.path.basename('report_'+recipient_id+'.png'), open('report_'+recipient_id+'.png', 'rb'), 'image/png')
+        'filedata': (os.path.basename('test.png'), open('test.png', 'rb'), 'image/png')
     }
 
     # multipart encode the entire payload
