@@ -1,5 +1,6 @@
 #Python libraries that we need to import for our bot
-import random
+import json
+import requests
 from PIL import Image
 from selenium import webdriver
 from flask import Flask, request
@@ -59,6 +60,8 @@ def receive_message():
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
+                        attach_url = 'https://www.twilio.com/blog/wp-content/uploads/2018/02/LaqUIdJlww5Owe1-WfT6X4Fa-0IATw-WENNtnOlZ5ZQzM_ANYwCwTDbsF6qreQaiGE4UH5k0zoBSM4r7Xp6Z-8MCdp47KVNmGyyRKmeLcmUr26rl6LNzx0ZkK59Yleq_Z3wZR-jV.png'
+                        send_attachment(recipient_id, attach_url)
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                             #print("##################  Message reçu : "+message['message']['text'])
                             #get_message('Siouville')
@@ -116,6 +119,26 @@ def get_message(spot):
     #w, h = img.size
     #img = img.crop((15,h-8335,w,h-3755)).save("report.png")
     return 'success'
+
+def send_attachment(send_id, attach_url):
+    params  = {"access_token": os.environ['access_token']}
+    headers = {"Content-Type": "application/json"}
+    data = json.dumps({"recipient": {
+                        "id": send_id
+                        },
+                        "message": {
+                            "attachment": {
+                                "type": "image",
+                                "payload": {
+                                    "url": attach_url, "is_reusable": True
+                                }
+                            }
+                        }
+    })
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    if r.status_code != 200:
+        print(r.status_code)
+        print(r.text)
 
 if __name__ == "__main__":
     app.run()
