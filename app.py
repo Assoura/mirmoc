@@ -9,39 +9,52 @@ from requests_toolbelt import MultipartEncoder
 from pymessenger.bot import Bot
 import os
 
-#driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
-#driver.set_window_size(840,620)
+print('1')
+driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
+driver.set_window_size(840,620)
 
+print('2')
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #EAAZAm0NGhNvoBABPn6MhEJGxN2Hhw37GZC53iXBOUDqGEbHsPV03ZCZCHSWnaW5y4q8a1H2gb5SC8VNKQKnfvMV0ucD03cPaeDnnovXzibahv6SapNJOWQd10UvG1sO0TtW4qE3kFx652tzLeA1tOh12xoZBZA4qo6uPsXTTIZCfAZDZD
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 
+print('3')
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 
+print('4')
 def receive_message():
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
         token_sent = request.args.get("hub.verify_token")
+        print('5')
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
+       print('8')
        output = request.get_json()
+       print('9')
        for event in output['entry']:
+          print('10')
           messaging = event['messaging']
           for message in messaging:
+            print('11')
             if message.get('message'):
+                print('12')
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
+                        print('13')
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
                     except:
+                        print('14')
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
+                    print('15')
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
 
@@ -49,12 +62,14 @@ def verify_fb_token(token_sent):
     #take token sent by facebook and verify it matches the verify token you sent
     #if they match, allow the request, else return an error
     if token_sent == VERIFY_TOKEN:
+        print('7')
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
 
 #chooses a random message to send to the user
 def scraping(commande,recipient_id):
     try:
+        print('131')
         site = 'msw'
         url = {'Quiberon' :
             {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
@@ -82,15 +97,19 @@ def scraping(commande,recipient_id):
         #img = Image.open(os.getcwd()+'/report.png')
         #w, h = img.size
         #img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report.png')
+        print('132')
     except:
+        print('133')
         bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'. ''')
         print('Erreur scraping')
 
 def send_report(recipient_id):
     try:
+        print('134')
         params = {
             "access_token": os.environ["ACCESS_TOKEN"]
         }
+        print('135')
         print(os.listdir(os.getcwd()))
         data = {
             # encode nested json to avoid errors during multipart encoding process
@@ -106,12 +125,14 @@ def send_report(recipient_id):
             }),
             'filedata': (os.path.basename('report.png'), open('report.png', 'rb'), 'image/png')
         }
+        print('136')
         # multipart encode the entire payload
         multipart_data = MultipartEncoder(data)
         # multipart header from multipart_data
         multipart_header = {
             'Content-Type': multipart_data.content_type
         }
+        print('137')
         print(os.listdir(os.getcwd()))
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
         if r.status_code != 200:
@@ -119,6 +140,8 @@ def send_report(recipient_id):
             print(r.text)
     except:
         print('Erreur send_report')
+        print('138')
 
 if __name__ == "__main__":
+    print('16')
     app.run()
