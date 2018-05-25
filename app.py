@@ -7,6 +7,10 @@ from flask import Flask, request
 from requests_toolbelt import MultipartEncoder
 from pymessenger.bot import Bot
 import os
+
+driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
+driver.set_window_size(840,620)
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #EAAZAm0NGhNvoBABPn6MhEJGxN2Hhw37GZC53iXBOUDqGEbHsPV03ZCZCHSWnaW5y4q8a1H2gb5SC8VNKQKnfvMV0ucD03cPaeDnnovXzibahv6SapNJOWQd10UvG1sO0TtW4qE3kFx652tzLeA1tOh12xoZBZA4qo6uPsXTTIZCfAZDZD
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -35,7 +39,7 @@ def receive_message():
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         print('try...')
-                        #scraping(commande,recipient_id)
+                        scraping(commande,recipient_id)
                         send_report(recipient_id)
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
@@ -76,8 +80,6 @@ def scraping(commande,recipient_id):
         }
         spot = commande.split(' ')[1]
         site = 'msw'
-        driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
-        driver.set_window_size(840,620)
         #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
         driver.get(url[spot][site])
         #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
