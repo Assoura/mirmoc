@@ -80,15 +80,15 @@ def scraping(commande,recipient_id):
     site = commande.split(' ')[2]
     driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
     driver.set_window_size(840,620)
-    bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+    #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
     driver.get(url[spot][site])
-    bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+    #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-    bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+    #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
-    bot.send_text_message(recipient_id,'''Je les enregistre...''')
+    #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     #print(os.listdir(os.getcwd()))
     return 'success'
 
