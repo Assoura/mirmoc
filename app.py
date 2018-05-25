@@ -42,8 +42,8 @@ def receive_message():
                     except:
                         print('Erreur')
                         #bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
-                    else:
-                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                else:
+                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
     return "Message Processed"
 
 
@@ -89,7 +89,7 @@ def scraping(commande,recipient_id):
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     bot.send_text_message(recipient_id,'''Je les enregistre...''')
-    print(os.listdir(os.getcwd()))
+    #print(os.listdir(os.getcwd()))
     return 'success'
 
 def send_report(recipient_id):
