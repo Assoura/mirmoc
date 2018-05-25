@@ -87,14 +87,16 @@ def scraping(commande,recipient_id):
     driver.get(url[spot][site])
     bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-    #img = Image.open("report.png")
-    #w, h = img.size
-    #img = img.crop((15,h-8335,w,h-3755)).save("report.png")
-    #print(os.listdir(os.getcwd()))
+    bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+    img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
+    w, h = img.size
+    img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    bot.send_text_message(recipient_id,'''Je les enregistre...''')
+    print(os.listdir(os.getcwd()))
     return 'success'
 
-def send_report(send_id):
-    print("sending message to {recipient}: {text}".format(recipient=recipient_id, text='Et voilà'))
+def send_report(recipient_id):
+    print("sending message to {recipient}: {text}".format(recipient=recipient_id, text='Et voilà :'))
 
     params = {
         "access_token": os.environ["ACCESS_TOKEN"]
