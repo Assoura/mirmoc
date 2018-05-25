@@ -22,8 +22,6 @@ bot = Bot (ACCESS_TOKEN)
 print('3')
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
-
-print('4')
 def receive_message():
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
