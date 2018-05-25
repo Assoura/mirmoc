@@ -73,7 +73,7 @@ def receive_message():
                             driver.save_screenshot("/app/test2.png")
                             print("##################  Screenshot fait")
                             print(os.listdir(os.getcwd()))
-                            send_message(recipient_id, "Et voilà :"):
+                            send_message(recipient_id, "Et voilà :")
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
