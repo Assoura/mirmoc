@@ -80,19 +80,19 @@ def scraping(commande,recipient_id):
              'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
         }
         spot = commande.split(' ')[1]
-        bot.send_text_message(recipient_id,'''Got you ! Je cherche...''')
+        #bot.send_text_message(recipient_id,'''Got you ! Je cherche...''')
         driver.get(url[spot][site])
-        bot.send_text_message(recipient_id,'''Trouvé ! Je choppe les prévisions...''')
+        #bot.send_text_message(recipient_id,'''Trouvé ! Je choppe les prévisions...''')
         print(os.listdir(os.getcwd()))
-        driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-        bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-        img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
+        driver.save_screenshot(os.getcwd()+'/report.png')
+        #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+        img = Image.open(os.getcwd()+'/report.png')
         w, h = img.size
         print(h)
         print(w)
         #img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
         print(os.listdir(os.getcwd()))
-        bot.send_text_message(recipient_id,'''Et voilà :''')
+        #bot.send_text_message(recipient_id,'''Et voilà :''')
     except:
         bot.send_text_message(recipient_id,'''Je n'ai pas trouvé... Essayez avec un autre spot par exemple 'Mirmoc Siouville'. ''')
         print('Erreur scraping')
@@ -115,7 +115,7 @@ def send_report(recipient_id):
                     'payload': {}
                 }
             }),
-            'filedata': (os.path.basename('report_'+recipient_id+'.png'), open('report_'+recipient_id+'.png', 'rb'), 'image/png')
+            'filedata': (os.path.basename('report.png'), open('report.png', 'rb'), 'image/png')
         }
 
         # multipart encode the entire payload
