@@ -64,7 +64,7 @@ def receive_message():
                             bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
                             driver.get(url[spot][site])
                             bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
-                            driver.save_screenshot(os.getcwd()+/'report.png")
+                            driver.save_screenshot(os.getcwd()+'/report.png")
                             #img = Image.open("report.png")
                             #w, h = img.size
                             #img = img.crop((15,h-8335,w,h-3755)).save("report.png")
