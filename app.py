@@ -46,7 +46,7 @@ def receive_message():
             else:
                 print('15')
                 bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-return "Message Processed"
+    #return "Message Processed"
 
 #chooses a random message to send to the user
 def scraping(commande,recipient_id):
