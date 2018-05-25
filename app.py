@@ -63,6 +63,7 @@ def receive_message():
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
+                        print(os.getcwd())
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                             #print("##################  Message reçu : "+message['message']['text'])
                             #get_message('Siouville')
