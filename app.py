@@ -30,21 +30,17 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                print(recipient_id+' a envoyé : '+message['message']['text'])
+                commande = message['message']['text']
+                print(recipient_id+' a envoyé : '+commande)
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
-                        commande = message['message']['text']
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
-                        #bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
-                        #bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
-                        #attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
-                        #send_attachment(recipient_id, attach_url)
                     except:
                         print('Erreur')
-                        #bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
                 else:
-                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
 
 
@@ -78,27 +74,26 @@ def scraping(commande,recipient_id):
          'msw' : "http://fr.magicseaweed.com/Casernes-Surf-Report/1175/"}
     }
     spot = commande.split(' ')[1]
-    site = commande.split(' ')[2]
+    site = 'msw'
     driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
     driver.set_window_size(840,620)
     #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
     driver.get(url[spot][site])
     #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+    print(os.getcwd())
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    print(os.getcwd())
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
 
 def send_report(recipient_id):
-    print("sending message to {recipient}: {text}".format(recipient=recipient_id, text='Et voilà :'))
-
     params = {
         "access_token": os.environ["ACCESS_TOKEN"]
     }
-    print(os.getcwd())
     data = {
         # encode nested json to avoid errors during multipart encoding process
         'recipient': json.dumps({
