@@ -30,6 +30,7 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
+                print(recipient_id+' a envoyé : '+message['message']['text'])
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         commande = message['message']['text']
@@ -89,7 +90,6 @@ def scraping(commande,recipient_id):
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
-    #print(os.listdir(os.getcwd()))
     return 'success'
 
 def send_report(recipient_id):
