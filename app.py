@@ -60,6 +60,15 @@ def receive_message():
                             attach_url = 'https://github.com/Assoura/mirmoc/blob/master/report.png?raw=true'
                             bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
                             send_attachment(recipient_id, attach_url)
+
+                            driver.set_window_size(840,620)
+                            print("##################  Ouvre site")
+                            driver.get(url[spot][site])
+                            print("##################  Site ouvert")
+                            print(os.listdir(os.getcwd()))
+                            driver.save_screenshot("/app/test.png")
+                            print("##################  Screenshot fait")
+                            print(os.listdir(os.getcwd()))
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
