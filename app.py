@@ -82,14 +82,13 @@ def scraping(commande,recipient_id):
     driver.get(url[spot][site])
     #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     print(os.listdir(os.getcwd()))
-    driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
+    driver.save_screenshot(os.getcwd()+'/report1.png')
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-    img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
+    img = Image.open(os.getcwd()+'/report1.png')
     w, h = img.size
-    img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report2.png')
     print(os.listdir(os.getcwd()))
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
-    return 'success'
 
 def send_report(recipient_id):
     params = {
@@ -107,7 +106,7 @@ def send_report(recipient_id):
                 'payload': {}
             }
         }),
-        'filedata': (os.path.basename('test.png'), open('test.png', 'rb'), 'image/png')
+        'filedata': (os.path.basename('report.png'), open('report2.png', 'rb'), 'image/png')
     }
 
     # multipart encode the entire payload
