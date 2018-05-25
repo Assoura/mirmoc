@@ -63,15 +63,15 @@ def receive_message():
                             #send_attachment(recipient_id, attach_url)
 
                             print(os.getcwd())
-                            print(os.listdir(os.getcwd()))
+                            print(os.listdir(os.getcwd()+'/tmp'))
                             driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
                             driver.set_window_size(840,620)
                             print("##################  Ouvre site")
                             driver.get(url[spot][site])
                             print("##################  Site ouvert")
-                            driver.save_screenshot("/app/test.png")
+                            driver.save_screenshot("/app/tmp/test2.png")
                             print("##################  Screenshot fait")
-                            print(os.listdir(os.getcwd()))
+                            print(os.listdir(os.getcwd()+'/tmp'))
                         except:
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
