@@ -34,6 +34,7 @@ def receive_message():
                 print(recipient_id+' a envoyé : '+commande)
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
+                        print('try...')
                         #scraping(commande,recipient_id)
                         #send_report(recipient_id)
                     except:
