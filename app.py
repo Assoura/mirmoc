@@ -43,7 +43,7 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
                 print(recipient_id+' a envoyé : '+commande)
-                print timer
+                print(timer)
                 if message['message'].get('text') and "Mirmoc" in message['message']['text'] and timer == 1:
                     timer = 0
                     try:
