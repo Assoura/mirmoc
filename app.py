@@ -35,7 +35,7 @@ def receive_message():
             if message.get('message'):
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
-                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and timer == 1:
+                if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
