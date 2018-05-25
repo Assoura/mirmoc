@@ -20,6 +20,7 @@ bot = Bot (ACCESS_TOKEN)
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
+    timer = 1
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
@@ -29,23 +30,31 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
+       print('###################### 1')
        for event in output['entry']:
+          print('###################### 2')
           messaging = event['messaging']
           for message in messaging:
+            print('###################### 3')
             if message.get('message'):
+                print('###################### 4')
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
                 print(recipient_id+' a envoyé : '+commande)
-                if message['message'].get('text') and "Mirmoc" in message['message']['text']:
+                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and timer == 1:
+                    timer = 0
                     try:
                         print('try...')
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
+                        timer = 1
                     except:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                        timer = 1
                 else:
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                    timer =1
     return "Message Processed"
 
 
