@@ -35,7 +35,7 @@ def receive_message():
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     try:
                         scraping(commande,recipient_id)
-                        send_report(recipient_id)
+                        #send_report(recipient_id)
                     except:
                         print('Erreur')
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
