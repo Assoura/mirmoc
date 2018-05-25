@@ -30,21 +30,18 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                if recipient_id != '1547681661986967':
-                    bot.send_text_message('1547681661986967',recipient_id+' à envoyé : '+message['message']['text'])
-                if message['message'].get('text'):
-                    if "Mirmoc" in message['message']['text']:
-                        try:
-                            commande = message['message']['text']
-                            scraping(commande,recipient_id)
-                            send_report(recipient_id)
-                            #bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
-                            #bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
-                            #attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
-                            #send_attachment(recipient_id, attach_url)
-                        except:
-                            print('Erreur')
-                            #bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
+                if message['message'].get('text') and "Mirmoc" in message['message']['text']:
+                    try:
+                        commande = message['message']['text']
+                        scraping(commande,recipient_id)
+                        send_report(recipient_id)
+                        #bot.send_text_message(recipient_id,'Oups il y a eu un problème... (je suis toujours en développement). Je ne peux faire que ça pour le moment : '+url[spot][site])
+                        #bot.send_text_message(recipient_id,'''Mais l'idéee est de faire ça :''')
+                        #attach_url = 'https://github.com/Assoura/mirmoc/blob/master/test.png?raw=true'
+                        #send_attachment(recipient_id, attach_url)
+                    except:
+                        print('Erreur')
+                        #bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
                     else:
                         bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les site 'msw' et 'surf_report' et les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot site' ''')
     return "Message Processed"
