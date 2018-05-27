@@ -1,6 +1,6 @@
 #Python libraries that we need to import for our bot
 import json
-import request
+import requests
 from PIL import Image
 from selenium import webdriver
 from flask import Flask, requests
