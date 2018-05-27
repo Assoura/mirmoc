@@ -22,12 +22,12 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
-        # get whatever message a user sent the 
+        # get whatever message a user sent the
        output = request.get_json()
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
-            if message.get('message'):à
+            if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
