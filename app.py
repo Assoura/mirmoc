@@ -60,7 +60,7 @@ def verify_fb_token(token_sent):
 def scraping(commande,recipient_id):
     url = {'Quiberon' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-         'msw' : "http://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556"},
+         'msw' : "https://magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556/"},
      'Etretat' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
          'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
