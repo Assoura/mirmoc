@@ -99,7 +99,6 @@ def send_report(recipient_id):
     params = {
         "access_token": os.environ["ACCESS_TOKEN"]
     }
-    log(os.getcwd())
     data = {
         # encode nested json to avoid errors during multipart encoding process
         'recipient': json.dumps({
