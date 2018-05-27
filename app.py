@@ -33,18 +33,17 @@ def receive_message():
             commande = message['message']['text']
         except:
             print('Message non pris en compte')
-        else:
-            print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
-            if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
-                try:
-                    scraping(commande,recipient_id)
-                    send_report(recipient_id)
-                except:
-                    print('Erreur')
-                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-            else:
+        print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
+        if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
+            try:
+                scraping(commande,recipient_id)
+                send_report(recipient_id)
+            except:
+                print('Erreur')
                 bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-            commande0 = commande
+        else:
+            bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+        commande0 = commande
     return "Message Processed"
 
 
@@ -81,17 +80,17 @@ def scraping(commande,recipient_id):
     site = 'msw'
     driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
     driver.set_window_size(840,620)
-    bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+    #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
     driver.get(url[spot][site])
-    bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+    #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     print(os.listdir(os.getcwd()))
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-    bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+    #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     print(os.listdir(os.getcwd()))
-    bot.send_text_message(recipient_id,'''Je les enregistre...''')
+    #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
 
 def send_report(recipient_id):
