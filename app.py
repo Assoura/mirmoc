@@ -42,7 +42,7 @@ def receive_message():
                 print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
                 temps = time.time()
                 print(str(temps))
-                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and -message['timestamp']+temps*1000 <= 30000 :
+                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and -message['timestamp']+temps*1000 <= 3000 :
                     try:
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
