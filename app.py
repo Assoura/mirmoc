@@ -69,7 +69,7 @@ def verify_fb_token(token_sent):
 def scraping(commande,recipient_id):
     url = {'Quiberon' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/sainte-barbe-s1169.html",
-         'msw' : "https://magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556/"},
+         'msw' : "https://fr.magicseaweed.com/La-Cote-Sauvage-Surf-Report/1556/"},
      'Etretat' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/etretat-s1022.html",
          'msw' : "http://fr.magicseaweed.com/Etretat-Surf-Report/80/"},
@@ -97,7 +97,7 @@ def scraping(commande,recipient_id):
     bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
-    img = img.crop((15,500,w,h-3800)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    img = img.crop((15,0,w,h-3805)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     print('Image récupérée')
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
