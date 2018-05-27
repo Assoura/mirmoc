@@ -1,5 +1,5 @@
 #Python libraries that we need to import for our bot
-import requestsss
+import requests
 from PIL import Image
 import json
 from selenium import webdriver
@@ -15,24 +15,23 @@ bot = Bot (ACCESS_TOKEN)
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     commande0 ='XXX'
+    print(commande)
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
         token_sent = request.args.get("hub.verify_token")
+        print('Vérification du token !')
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the
         output = request.get_json()
         event = output['entry'][-1]
-        help(event)
         print(event)
         message = event['messaging'][-1]
-        help(message)
-        print (message)
         recipient_id = message['sender']['id']
         commande = message['message']['text']
-        print(recipient_id+' a envoyé : '+commande)
+        print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+message['timestamp'])
         if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
             try:
                 scraping(commande,recipient_id)
@@ -120,6 +119,9 @@ def send_report(recipient_id):
     }
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
+
+    print('Image envoyée !')
+
     if r.status_code != 200:
         print(r.status_code)
         print(r.text)
