@@ -1,7 +1,7 @@
 #Python libraries that we need to import for our bot
-import json
-#import requests
+import requests
 from PIL import Image
+import json
 from selenium import webdriver
 from flask import Flask, requests
 from requests_toolbelt import MultipartEncoder
