@@ -1,6 +1,6 @@
 #Python libraries that we need to import for our bot
 import json
-import requests
+import request
 from PIL import Image
 from selenium import webdriver
 from flask import Flask, requests
@@ -27,7 +27,7 @@ def receive_message():
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
-            if message.get('message'):
+            if message.get('message'):à
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 commande = message['message']['text']
