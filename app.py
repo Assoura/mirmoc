@@ -15,7 +15,6 @@ bot = Bot (ACCESS_TOKEN)
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    commande0 ='XXX'
     print('Initialisation')
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
@@ -41,8 +40,9 @@ def receive_message():
                 print('Message non pris en compte')
             else:
                 print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
-                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
-                    commande0 = commande
+                temps = time.time()
+                print(str(temps))
+                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and message['timestamp']+10 <= temps :
                     try:
                         scraping(commande,recipient_id)
                         send_report(recipient_id)
