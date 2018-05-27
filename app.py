@@ -128,7 +128,7 @@ def send_report(recipient_id):
     multipart_header = {
         'Content-Type': multipart_data.content_type
     }
-
+    bot.send_text_message(recipient_id,'''Et voilà :)''')
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=multipart_header, data=multipart_data)
 
     print('Image envoyée !')
