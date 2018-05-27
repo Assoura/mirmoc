@@ -30,7 +30,7 @@ def receive_message():
         message = event['messaging'][-1]
         recipient_id = message['sender']['id']
         commande = message['message']['text']
-        print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+message['timestamp'])
+        print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
         if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
             try:
                 scraping(commande,recipient_id)
