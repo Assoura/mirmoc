@@ -89,7 +89,7 @@ def scraping(commande,recipient_id):
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
-    img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    #img = img.crop((15,h-8335,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     print(os.listdir(os.getcwd()))
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
