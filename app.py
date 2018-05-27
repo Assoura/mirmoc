@@ -1,5 +1,5 @@
 #Python libraries that we need to import for our bot
-import requests
+import requestsss
 from PIL import Image
 import json
 from selenium import webdriver
