@@ -15,7 +15,7 @@ bot = Bot (ACCESS_TOKEN)
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     commande0 ='XXX'
-    print(commande)
+    print('Initialisation')
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
@@ -27,7 +27,6 @@ def receive_message():
         # get whatever message a user sent the
         output = request.get_json()
         event = output['entry'][-1]
-        print(event)
         message = event['messaging'][-1]
         recipient_id = message['sender']['id']
         commande = message['message']['text']
