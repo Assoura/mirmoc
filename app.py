@@ -27,19 +27,20 @@ def receive_message():
         # get whatever message a user sent the
         output = request.get_json()
         event = output['entry'][-1]
-        message = event['messaging'][-1]
-        recipient_id = message['sender']['id']
-        commande = message['message']['text']
-        print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
-        if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
-            try:
-                scraping(commande,recipient_id)
-                send_report(recipient_id)
-            except:
-                print('Erreur')
+        try:
+            message = event['messaging'][-1]
+            recipient_id = message['sender']['id']
+            commande = message['message']['text']
+            print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
+            if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
+                try:
+                    scraping(commande,recipient_id)
+                    send_report(recipient_id)
+                except:
+                    print('Erreur')
+                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+            else:
                 bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-        else:
-            bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
         commande0 = commande
     return "Message Processed"
 
