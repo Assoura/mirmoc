@@ -95,7 +95,6 @@ def scraping(commande,recipient_id):
     return 'success'
 
 def send_report(recipient_id):
-    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text='Et voilà :'))
     params = {
         "access_token": os.environ["ACCESS_TOKEN"]
     }
