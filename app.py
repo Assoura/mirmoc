@@ -26,7 +26,7 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the
-        time.sleep(5)
+        #time.sleep(5)
         try:
             output = request.get_json()
             event = output['entry'][-1]
@@ -92,9 +92,9 @@ def scraping(commande,recipient_id):
     #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-    #img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
-    #w, h = img.size
-    #img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
+    w, h = img.size
+    img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     print('Image récupérée')
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
