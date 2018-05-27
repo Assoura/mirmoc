@@ -26,7 +26,7 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the
-        #time.sleep(5)
+        time.sleep(5)
         try:
             output = request.get_json()
             event = output['entry'][-1]
