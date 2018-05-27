@@ -23,24 +23,21 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the
-       output = request.get_json()
-       for event in output['entry']:
-          messaging = event['messaging']
-          for message in messaging:
-            if message.get('message'):
-                #Facebook Messenger ID for user so we know where to send response back to
-                recipient_id = message['sender']['id']
-                commande = message['message']['text']
-                print(recipient_id+' a envoyé : '+commande)
-                if message['message'].get('text') and "Mirmoc" in message['message']['text']:
-                    try:
-                        scraping(commande,recipient_id)
-                        #send_report(recipient_id)
-                    except:
-                        print('Erreur')
-                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-                else:
-                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+        output = request.get_json()
+        event = output['entry'][-1]
+        message = event['messaging'][-1]
+        recipient_id = message['sender']['id']
+        commande = message['message']['text']
+        print(recipient_id+' a envoyé : '+commande)
+        if message['message'].get('text') and "Mirmoc" in message['message']['text']:
+            try:
+                scraping(commande,recipient_id)
+                send_report(recipient_id)
+            except:
+                print('Erreur')
+                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+        else:
+            bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
 
 
