@@ -2,6 +2,7 @@
 import requests
 from PIL import Image
 import json
+import timer
 from selenium import webdriver
 from flask import Flask, request
 from requests_toolbelt import MultipartEncoder
@@ -25,6 +26,7 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the
+        timer.sleep(5)
         output = request.get_json()
         event = output['entry'][-1]
         try:
@@ -44,7 +46,7 @@ def receive_message():
                     print('Erreur')
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
             else:
-                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' (Si je deviens trop bavard il faut m'envoyer un message que je ne comprend pas :)''')
     return "Message Processed"
 
 
