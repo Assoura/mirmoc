@@ -27,26 +27,30 @@ def receive_message():
     else:
         # get whatever message a user sent the
         #time.sleep(5)
-        output = request.get_json()
-        event = output['entry'][-1]
         try:
-            message = event['messaging'][-1]
-            recipient_id = message['sender']['id']
-            commande = message['message']['text']
+            output = request.get_json()
+            event = output['entry'][-1]
         except:
-            print('Message non pris en compte')
+            print('Erreur de requete')
         else:
-            print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
-            if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
-                commande0 = commande
-                try:
-                    scraping(commande,recipient_id)
-                    send_report(recipient_id)
-                except:
-                    print('Erreur')
-                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+            try:
+                message = event['messaging'][-1]
+                recipient_id = message['sender']['id']
+                commande = message['message']['text']
+            except:
+                print('Message non pris en compte')
             else:
-                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
+                if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
+                    commande0 = commande
+                    try:
+                        scraping(commande,recipient_id)
+                        send_report(recipient_id)
+                    except:
+                        print('Erreur')
+                        bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                else:
+                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
 
 
