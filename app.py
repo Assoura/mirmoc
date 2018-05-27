@@ -3,7 +3,7 @@ import requests
 from PIL import Image
 import json
 from selenium import webdriver
-from flask import Flask #, requests
+from flask import Flask, request
 from requests_toolbelt import MultipartEncoder
 from pymessenger.bot import Bot
 import os
