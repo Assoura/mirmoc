@@ -35,7 +35,6 @@ def receive_message():
             commande = message['message']['text']
         except:
             print('Message non pris en compte')
-            output = request.get_json()
         else:
             print(recipient_id+' a envoyé : '+commande+''' à l'instant : '''+str(message['timestamp']))
             if message['message'].get('text') and "Mirmoc" in message['message']['text'] and commande != commande0 :
@@ -48,7 +47,6 @@ def receive_message():
                     bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
             else:
                 bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
-            output = request.get_json()
     return "Message Processed"
 
 
@@ -90,9 +88,9 @@ def scraping(commande,recipient_id):
     #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
     #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
-    img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
-    w, h = img.size
-    img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
+    #img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
+    #w, h = img.size
+    #img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
     print('Image récupérée')
     #bot.send_text_message(recipient_id,'''Je les enregistre...''')
     return 'success'
