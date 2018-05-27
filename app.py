@@ -42,9 +42,9 @@ def receive_message():
                     send_report(recipient_id)
                 except:
                     print('Erreur')
-                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La torche', 'Vendée', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                    bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
             else:
-                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La torche', 'Vendée', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
+                bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
     return "Message Processed"
 
 
@@ -67,10 +67,10 @@ def scraping(commande,recipient_id):
      'Siouville' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/siouville-s1079.html",
          'msw' : "http://fr.magicseaweed.com/Siouville-Surf-Report/1547/"},
-     'Vendée' :
+     'Vendee' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/bud-bud-s1005.html",
          'msw' : "http://fr.magicseaweed.com/Les-Conches-Bud-Bud-Surf-Report/1573/"},
-     'La torche' :
+     'La_torche' :
         {'surf_report' : "https://www.surf-report.com/meteo-surf/la-torche-s1040.html",
          'msw' : "http://fr.magicseaweed.com/La-Torche-Surf-Report/72/"},
      'Seignosse' :
@@ -81,11 +81,11 @@ def scraping(commande,recipient_id):
     site = 'msw'
     driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
     driver.set_window_size(840,620)
-    bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+    #bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
     driver.get(url[spot][site])
-    bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+    #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-    bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+    #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,0,w,h-3755)).save(os.getcwd()+'/report_'+recipient_id+'.png')
