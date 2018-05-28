@@ -45,8 +45,10 @@ def receive_message():
                 if message['message'].get('text') and "Mirmoc" in message['message']['text']:
                     if -message['timestamp']+temps*1000 <= 3000:
                         try:
+                            print(time.time())
                             scraping(commande,recipient_id)
                             send_report(recipient_id)
+                            print(time.time())
                         except:
                             print('Erreur')
                             bot.send_text_message(recipient_id,'''Désolé, je n'ai pas compris. Je ne connais que les spots 'Seignosse', 'Siouville', 'La_torche', 'Vendee', 'Quiberon' et 'Etretat'. Je ne comprends que la syntaxe 'Mirmoc spot' ''')
@@ -90,11 +92,11 @@ def scraping(commande,recipient_id):
     site = 'msw'
     driver = webdriver.PhantomJS(os.getcwd()+"/bin/phantomjs")
     driver.set_window_size(840,620)
-    bot.send_text_message(recipient_id,'''Got you ! J'ouvre le site...''')
+    bot.send_text_message(recipient_id,'''Got you ! J'y vais, cela peut prendre quelques secondes...''')
     driver.get(url[spot][site])
-    bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
+    #bot.send_text_message(recipient_id,'''Je choppe les prévisions...''')
     driver.save_screenshot(os.getcwd()+'/report_'+recipient_id+'.png')
-    bot.send_text_message(recipient_id,'''Je les mets en forme...''')
+    #bot.send_text_message(recipient_id,'''Je les mets en forme...''')
     img = Image.open(os.getcwd()+'/report_'+recipient_id+'.png')
     w, h = img.size
     img = img.crop((15,h-8695,w,h-3805)).save(os.getcwd()+'/report_'+recipient_id+'.png')
