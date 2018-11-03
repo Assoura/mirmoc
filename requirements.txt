@@ -1,5 +1,2 @@
 Flask==0.12.2
-gunicorn==19.8.1
-Pillow==5.1.0
-pymessenger==0.0.7.0
-selenium==3.12.0
+twilio~=6.0.0
