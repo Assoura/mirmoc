@@ -46,7 +46,6 @@ def receive_message():
                     if -message['timestamp']+temps*1000 <= 3000:
                         try:
                             print(time.time())
-                            scraping(commande,recipient_id)
                             send_report(recipient_id)
                             print(time.time())
                         except:
